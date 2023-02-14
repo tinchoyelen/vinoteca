@@ -4,7 +4,7 @@ import Landing from '../Landing'
 
 const Button = () => {
   return (    
-    <button type="button" class="btn btn-dark">Click</button>
+    <button type="button" className="btn btn-dark">Click</button>
   )
 
 }
