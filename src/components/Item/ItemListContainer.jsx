@@ -4,26 +4,23 @@ const ItemListContainer = (props) => {
 
   const [vinos, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  const filter = props.filter;
 
   useEffect(() => {
-    try {
       setTimeout(() => {
         fetch('../data/data.json')
           .then(response => response.json())
-          .then(
-            (jsonData) => {
-              setData(jsonData);
-              setLoading(false);
-            })
-      }, 3000)
-
-
-    } catch (error) {
-      console.log(error);
-      setLoading(false);
-    }
-  }, []);
+          .then((jsonData) => {
+            if(filter) {
+              setData(jsonData.filter(vino => vino[filter] === true))
+            } else {
+              setData(jsonData)
+            }
+          })
+          .catch((error) => console.log(error))
+          .finally(() => {setLoading(false)})
+      }, 2000)
+  }, [filter]);
 
   if (loading) {
     return <div className='loading'>Loading...</div>;
@@ -34,7 +31,7 @@ const ItemListContainer = (props) => {
       <div className="row">
         {vinos.map(
           vino => (
-            <Item key= {vino.id} id= {vino.id} nombre = {vino.nombre} precio = {vino.precio} img = {vino.img} cepa = {vino.cepa} />
+            <Item key= {vino.id} id= {vino.id} nombre = {vino.nombre} precio = {vino.precio} img = {vino.img} cepa = {vino.cepa} oferta_tipo = {vino.oferta_tipo} oferta = {vino.oferta} />
           )
         )}
       </div>
