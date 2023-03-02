@@ -7,37 +7,37 @@ const ItemListContainer = (props) => {
 
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        fetch('data.json')
+    try {
+      setTimeout(() => {
+        fetch('../data/data.json')
           .then(response => response.json())
           .then(
-          (jsonData) => {
-            setData(jsonData);
-            setLoading(false);
-          })
-        
-        
-      } catch (error) {
-        console.log(error);
-        setLoading(false);
-      }
-    };
+            (jsonData) => {
+              setData(jsonData);
+              setLoading(false);
+            })
+      }, 3000)
 
-    fetchData();
+
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className='loading'>Loading...</div>;
   }
 
   return (
-    <div>
-      {vinos.map(
-        vino => (
-          <Item id= {vino.id} nombre = {vino.nombre} precio = {vino.precio} img = {vino.img} cepa = {vino.cepa} />
-        ) 
-      )}
+    <div className='container'>
+      <div className="row">
+        {vinos.map(
+          vino => (
+            <Item key= {vino.id} id= {vino.id} nombre = {vino.nombre} precio = {vino.precio} img = {vino.img} cepa = {vino.cepa} />
+          )
+        )}
+      </div>
     </div>
   );
 }
