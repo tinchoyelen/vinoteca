@@ -1,31 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-/*import App from './App';*/
-/*import reportWebVitals from './reportWebVitals';*/
-/*import NavBar from './components/NavBar/NavBar';*/
-import { BrowserRouter, Routes, Route } from 'react-router-dom'; 
-import Landing from './components/Landing';
+import { BrowserRouter } from 'react-router-dom';
+import {Main} from "./components/Main";
+import NavBar from "./components/NavBar/NavBar";
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-
   <>
-  {/* <NavBar /> */}
- 
- <BrowserRouter>
-
-  <Landing/>
-  
-</BrowserRouter>
-
-  {/* <Button/>  */}
-  {/* <CartWidget/>  */}
+    <BrowserRouter>
+      <NavBar />
+      <Main />
+    </BrowserRouter>
   </>
-
- /* <React.StrictMode> 
-     <NavBar />
-  </React.StrictMode> */
 );
 
 

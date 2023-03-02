@@ -1,16 +1,20 @@
 import React from 'react'
-import NavBar from './NavBar/NavBar'
-import Button from './Button/Button'
-import ItemListContainer from './ItemListContainer'
 
 
 const Landing = () => {
   return <>
-  <NavBar />
-  <Button/>
-  <ItemListContainer  greeting= "Bienvenidos a La Vinoteca, el lugar de los mejores vinos"/> 
-  
-</>
+    <div className="alert alert-primary text-center" role="alert">
+      Bienvenidos a La Vinoteca, el lugar de los mejores vinos
+    </div>
+    <div className="container">
+      <div className="row">
+        <div>foto de la vinoteca</div>
+      </div>
+      <div className="row">
+        <div className="col">Texto descriptivo</div>
+      </div>
+    </div>
+  </>
 }
 
 

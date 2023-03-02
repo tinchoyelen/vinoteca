@@ -1,0 +1,17 @@
+- Mejorar los estilos del loading...
+
+- Definir Home page, 2 opciones:
+    A) Crearle contenido y estilos, foto de portada, texto informativo etc.
+    B) Reformar la navegacion y que la Home sea la pantalla con la lista de productos.
+    Para esto va a ser necesario modificar el Route en Main.js para que no cargue la Landing y en vez de eso que cargue el ItemListContainer sin params
+    Luego habría que remover el Link de HOME en NavBar.js
+
+- Agregar contenido en pagina de contacto, idem Home. Si no eliminarlo tanto del NavBar.js como del Router en Main.js
+
+- Mejorar contendio de la página de detalle, o sea el componente ItemDetailContainer. En este momento es simplemente una copia de un item de la lista.
+Si vamos a agregar contenido extra para el detalle hay que agregar esa data como parametros en el data.json
+
+- Implementar la funcionalidad del carrito. (Por lo que vi no es necesario para esta entrega)
+    - Al agregar ui item al carrito se debería mostrar la cantidad total de items en el carrito
+    - Al hacer click en el carrito se debería desplegar un listado de items agregados con la posibilidad de removerlos o agregar mas del mismo
+    - Tener un boton de finalizar compra.
