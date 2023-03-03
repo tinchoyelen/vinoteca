@@ -3,7 +3,6 @@ import {ItemDetailContainer} from './Item/ItemDetailContainer'
 import ItemListContainer from './Item/ItemListContainer'
 import { Routes, Route } from 'react-router-dom';
 import Landing from './Landing';
-import Contacto from "./Contacto";
 
 
 
@@ -15,7 +14,7 @@ export const Main = () => {
         <Route exact path='/vinos' element={<ItemListContainer />} />
         <Route exact path='/vinos/:id' element={<ItemDetailContainer />} />
         <Route exact path='/ofertas' element={<ItemListContainer filter={'oferta'} />} />
-        <Route exact path='/contacto' element={<Contacto />} />
+        <Route exact path='/cepas/:cepa' element={<ItemListContainer filter={'cepa'} />} />
       </Routes>
     </main>
   )

@@ -1,36 +1,50 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import CartWidget from '../CartWidget'
-import {Link} from "react-router-dom";
+import {Container, Nav, Navbar, NavDropdown} from "react-bootstrap";
 
 
 const NavBar = () => {
+  const [cepas, setData] = useState([]);
+
+  useEffect(() => {
+      fetch('../data/data.json')
+        .then(response => response.json())
+        .then((jsonData) => {
+          const cepas = [];
+          jsonData.forEach(vino => {
+            if(!cepas.includes(vino.cepa)) {
+              cepas.push(vino.cepa)
+            }
+            setData(cepas)
+          })
+        })
+        .catch((error) => console.log(error))
+  }, []);
     return (
         <>
-        <nav className="navbar navbar-expand-lg bg-body-tertiary">
-      <div className="container-fluid">
-        <Link className="navbar-brand" to={'/'}> LA VINOTECA</Link>
-        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
-          <ul className="navbar-nav">
-            <li className="nav-item">
-              <Link className="nav-link" to={'/'}>Home</Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to={'/vinos'}>Productos</Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to={'ofertas'}>OnSale</Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to={'/contacto'}>Contacto</Link>
-            </li>
-          </ul>
-        </div>
-        <CartWidget/>
-      </div>
-    </nav>
+          <Navbar bg="light" expand="lg">
+            <Container fluid>
+              <Navbar.Brand href="/">LA VINOTECA</Navbar.Brand>
+              <Navbar.Toggle aria-controls="basic-navbar-nav" />
+              <Navbar.Collapse id="basic-navbar-nav" className='justify-content-end'>
+                <Nav>
+                  <Nav.Link href="/">Home</Nav.Link>
+                  <Nav.Link href="/vinos">Productos</Nav.Link>
+                  <Nav.Link href="/ofertas">OnSale</Nav.Link>
+                  <NavDropdown id="basic-nav-dropdown" title="Cepas">
+                    {cepas.map(
+                      cepa => (
+                        <NavDropdown.Item key={cepa} href={'/cepas/' + cepa}>{cepa}</NavDropdown.Item>
+                      )
+                    )}
+                  </NavDropdown>
+
+                </Nav>
+              </Navbar.Collapse>
+              <CartWidget/>
+            </Container>
+          </Navbar>
+
         </>
       )
 }
