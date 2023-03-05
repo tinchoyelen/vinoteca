@@ -13,7 +13,7 @@ export const Item = ({id, img, nombre, precio, cepa, oferta, oferta_tipo}) => {
         <img src= {`/imagenes/${img}`} className="card-img-top mt-2" alt="imagen de vinos"/>
         <div className="card-body">
           <h5 className="card-title"> {nombre}</h5>
-          <p className="card-text">Precio: {oferta ? calculateInflation(precio - precio * (parseFloat(oferta_tipo.match(/\d+/)[0])) / 100) : calculateInflation(precio)}</p>
+          <p className="card-text">Precio: {oferta ? calculateInflation(precio - (precio * parseFloat(oferta_tipo.match(/\d+/)[0]) / 100)) : calculateInflation(precio)}</p>
           <p className="card-text">Cepa: {cepa}</p>
           <Link className="btn btn-primary agregar" to={`/vinos/${id}`}>
             Detalle
