@@ -6,10 +6,10 @@ const Landing = () => {
     <div className="alert alert-primary text-center" role="alert">
       Bienvenidos a La Vinoteca, el lugar de los mejores vinos
     </div>
-    <div className="container">
+    <div className="container-fluid">
       <div className="row">
-        <div>
-          <img src="vinoteca\public\imagenes\vinoteca.jpg" alt="La vinoteca" />
+        <div className={'col'}>
+          <img id={'foto-portada'} src="/imagenes/vinoteca.jpg" alt="La vinoteca" />
         </div>
       </div>
       <div className="row">

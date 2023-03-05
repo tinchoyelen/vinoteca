@@ -37,3 +37,7 @@ p{
 .carrito-icon:hover {
   color: rgba(0,0,0,0.8);
 }
+
+#foto-portada {
+  width: 100%;
+}
