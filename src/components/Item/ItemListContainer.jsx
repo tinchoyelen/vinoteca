@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {Item} from './Item';
 import {useParams} from "react-router-dom";
+import Loading from "../Loading";
 const ItemListContainer = (props) => {
 
   const { cepa } = useParams();
@@ -32,7 +33,7 @@ const ItemListContainer = (props) => {
   }, [filter, cepa]);
 
   if (loading) {
-    return <div className='loading'>Loading...</div>;
+    return <Loading />
   }
 
   return (

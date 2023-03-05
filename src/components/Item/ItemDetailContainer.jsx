@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {Link, useParams} from 'react-router-dom'
 import SaleTag from "../SaleTag/SaleTag";
+import Loading from "../Loading";
 
 export const ItemDetailContainer = () => {
 
@@ -21,7 +22,7 @@ export const ItemDetailContainer = () => {
   }, [id]);
 
   if (loading) {
-    return <div className='loading'>Loading...</div>;
+    return <Loading />
   }
 
 
