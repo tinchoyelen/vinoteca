@@ -28,3 +28,12 @@ p{
   text-transform: uppercase;
   border-radius: 8%;
 }
+
+
+.carrito-icon {
+  color: rgba(0,0,0,0.65);
+  text-decoration: none;
+}
+.carrito-icon:hover {
+  color: rgba(0,0,0,0.8);
+}
