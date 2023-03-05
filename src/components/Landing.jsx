@@ -8,7 +8,9 @@ const Landing = () => {
     </div>
     <div className="container">
       <div className="row">
-        <div>foto de la vinoteca</div>
+        <div>
+          <img src="vinoteca\public\imagenes\vinoteca.jpg" alt="La vinoteca" />
+        </div>
       </div>
       <div className="row">
         <div className="col">Texto descriptivo</div>
