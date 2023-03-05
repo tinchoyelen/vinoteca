@@ -4,7 +4,7 @@ import SaleTag from "../SaleTag/SaleTag";
 import Loading from "../Loading";
 import {calculateInflation} from "../../utils/utils";
 
-export const ItemDetailContainer = () => {
+export const ItemDetailContainer = (props) => {
 
   const {id} = useParams()
   const [vino, setData] = useState([]);
@@ -38,7 +38,7 @@ export const ItemDetailContainer = () => {
             vino.oferta ? calculateInflation(vino.precio - vino.precio * (parseFloat(vino.oferta_tipo.match(/\d+/)[0]) / 100)) : calculateInflation(vino.precio)
           }</p>
           <p className="card-text">Cepa: {vino.cepa}</p>
-          <Link className="btn btn-primary agregar">
+          <Link className="btn btn-primary agregar" onClick={props.addToCart(vino)}>
             Agregar al carrito
           </Link>
         </div>
