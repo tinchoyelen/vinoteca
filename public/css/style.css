@@ -12,10 +12,6 @@ code {
     monospace;
 }
 
-p{
-  font-size: 10px;
-}
-
 .sale-tag {
   position: absolute;
   top: 8px;

@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {Link, useParams} from 'react-router-dom'
 import SaleTag from "../SaleTag/SaleTag";
 import Loading from "../Loading";
+import {calculateInflation} from "../../utils/utils";
 
 export const ItemDetailContainer = () => {
 
@@ -33,7 +34,7 @@ export const ItemDetailContainer = () => {
         <img src= {`/imagenes/${vino.img}`} className="card-img-top mt-2" alt="imagen de vinos"/>
         <div className="card-body">
           <h5 className="card-title"> {vino.nombre}</h5>
-          <p className="card-text">Precio: ${vino.precio}</p>
+          <p className="card-text">Precio: {vino.oferta ? calculateInflation(vino.precio - vino.precio * (parseFloat(vino.oferta_tipo.match(/\d+/)[0])) / 100) : calculateInflation(vino.precio)}</p>
           <p className="card-text">Cepa: {vino.cepa}</p>
           <Link className="btn btn-primary agregar">
             Agregar al carrito
