@@ -11,13 +11,21 @@ import NavBar from "./NavBar/NavBar";
 export const Main = () => {
   const [cartItems, setCartItems] = useState([]);
 
-  const handleAddToCart = (item) => {
-    setCartItems([...cartItems, item]);
+  const updateCart = (item) => {
+    const existingItem = cartItems.find((cartItem) => cartItem.id === item.id);
+
+    if (existingItem) {
+      const updatedCartItems = cartItems.map((cartItem) =>
+        cartItem.id === item.id
+          ? { ...cartItem, cantidad: cartItem.cantidad + 1 }
+          : cartItem
+      );
+      setCartItems(updatedCartItems);
+    } else {
+      setCartItems([...cartItems, { ...item, cantidad: 1 }]);
+    }
   }
 
-  const updateCart = (cart) => {
-    setCartItems(cart)
-  }
 
   return (
     <>
@@ -26,10 +34,10 @@ export const Main = () => {
         <Routes>
           <Route exact path='/' element={<Landing />} />
           <Route exact path='/vinos' element={<ItemListContainer />} />
-          <Route exact path='/vinos/:id' element={<ItemDetailContainer addToCart={handleAddToCart} />} />
+          <Route exact path='/vinos/:id' element={<ItemDetailContainer updateCart={updateCart}/>} />
           <Route exact path='/ofertas' element={<ItemListContainer filter={'oferta'} />} />
           <Route exact path='/cepas/:cepa' element={<ItemListContainer filter={'cepa'} />} />
-          <Route exact path='/carrito' element={<Cart items={cartItems} updateCart={updateCart} />}/>
+          <Route exact path='/carrito' element={<Cart cartItems={cartItems} updateCart={updateCart} />}/>
         </Routes>
       </main>
     </>
