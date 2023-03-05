@@ -1,6 +1,6 @@
 import React from 'react' 
 import { Link } from 'react-router-dom'
-import SaleTag from "../SaleTag/SaleTag";
+import SaleTag from "../Extra/SaleTag";
 import {calculateInflation} from "../../utils/utils";
 
 

@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react'
 import {Link, useParams} from 'react-router-dom'
-import SaleTag from "../SaleTag/SaleTag";
-import Loading from "../Loading";
+import SaleTag from "../Extra/SaleTag";
+import Loading from "../Extra/Loading";
 import {calculateInflation} from "../../utils/utils";
 
-export const ItemDetailContainer = (props) => {
+export const ItemDetailContainer = ({addToCart}) => {
 
   const {id} = useParams()
   const [vino, setData] = useState([]);
@@ -38,7 +38,7 @@ export const ItemDetailContainer = (props) => {
             vino.oferta ? calculateInflation(vino.precio - vino.precio * (parseFloat(vino.oferta_tipo.match(/\d+/)[0]) / 100)) : calculateInflation(vino.precio)
           }</p>
           <p className="card-text">Cepa: {vino.cepa}</p>
-          <Link className="btn btn-primary agregar" onClick={props.addToCart(vino)}>
+          <Link className="btn btn-primary agregar"  onClick={() => addToCart(vino)}>
             Agregar al carrito
           </Link>
         </div>
