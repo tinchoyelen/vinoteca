@@ -3,7 +3,7 @@ import CartWidget from '../Cart/CartWidget'
 import {Container, Nav, Navbar, NavDropdown} from "react-bootstrap";
 
 
-const NavBar = () => {
+const NavBar = (props) => {
   const [cepas, setData] = useState([]);
 
   useEffect(() => {
@@ -41,7 +41,7 @@ const NavBar = () => {
 
                 </Nav>
               </Navbar.Collapse>
-              <CartWidget/>
+              <CartWidget items={props.items}/>
             </Container>
           </Navbar>
 

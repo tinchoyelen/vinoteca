@@ -3,7 +3,7 @@ import {useParams} from 'react-router-dom'
 import Loading from "../Extra/Loading";
 import {Item} from "./Item";
 
-export const ItemDetailContainer = () => {
+export const ItemDetailContainer = ({updateCart}) => {
 
   const {id} = useParams()
   const [vino, setData] = useState([]);
@@ -27,6 +27,6 @@ export const ItemDetailContainer = () => {
 
 
   return (
-    <Item vino={vino}/>
+    <Item vino={vino} updateCart={updateCart}/>
   )
 }
