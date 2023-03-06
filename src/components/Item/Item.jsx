@@ -1,34 +1,34 @@
 import React from 'react'
 import SaleTag from "../Extra/SaleTag";
 import {calculateInflation, formatPrice} from "../../utils/utils";
-import {Button, Card, Col} from "react-bootstrap";
 import {useParams} from "react-router-dom";
+import {MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardText, MDBCardTitle, MDBCol} from "mdb-react-ui-kit";
 
 
 
-export const Item = ({vino}) => {
+export const Item = ({vino, updateCart}) => {
   const { id } = useParams();
 
   return (
-    <Col xs={3}>
-      <Card className={'mb-3'}>
+    <MDBCol md={3}>
+      <MDBCard className={'mb-3'}>
         {vino.oferta ? <SaleTag oferta_tipo={vino.oferta_tipo} /> : ''}
-        <Card.Img variant={'top'} src= {`/imagenes/${vino.img}`} alt="imagen de vinos"/>
-        <Card.Body>
-          <Card.Title> {vino.nombre}</Card.Title>
-          <Card.Text>Precio: {
+        <MDBCardImage variant={'top'} src= {`/imagenes/${vino.img}`} alt="imagen de vinos"/>
+        <MDBCardBody>
+          <MDBCardTitle> {vino.nombre}</MDBCardTitle>
+          <MDBCardText>Precio: {
             formatPrice(vino.oferta
               ? calculateInflation(vino.precio - (vino.precio * parseFloat(vino.oferta_tipo.match(/\d+/)[0]) / 100))
               : calculateInflation(vino.precio))
-          }</Card.Text>
-          <Card.Text>Cepa: {vino.cepa}</Card.Text>
+          }</MDBCardText>
+          <MDBCardText>Cepa: {vino.cepa}</MDBCardText>
           {
             typeof id === "undefined"
-              ? <Button href={`/vinos/${vino.id}`}>Detalle</Button>
-              : <Button /*onClick={}*/ >Agregar al carrito</Button>
+              ? <MDBBtn href={`/vinos/${vino.id}`}>Detalle</MDBBtn>
+              : <MDBBtn onClick={() => updateCart(vino)} >Agregar al carrito</MDBBtn>
           }
-        </Card.Body>
-      </Card>
-    </Col>
+        </MDBCardBody>
+      </MDBCard>
+    </MDBCol>
     )
 }
