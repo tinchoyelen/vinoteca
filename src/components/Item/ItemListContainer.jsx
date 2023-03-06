@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import {Item} from './Item';
 import {useParams} from "react-router-dom";
 import Loading from "../Extra/Loading";
-import {Container, Row} from "react-bootstrap";
 const ItemListContainer = (props) => {
 
   const { cepa } = useParams();
@@ -38,15 +37,13 @@ const ItemListContainer = (props) => {
   }
 
   return (
-    <Container className={'mt-5'}>
-      <Row>
-        {vinos.map(
-          vino => (
-            <Item key= {vino.id} id= {vino.id} nombre = {vino.nombre} precio = {vino.precio} img = {vino.img} cepa = {vino.cepa} oferta_tipo = {vino.oferta_tipo} oferta = {vino.oferta} />
-          )
-        )}
-      </Row>
-    </Container>
+    <>
+      {vinos.map(
+        vino => (
+          <Item key={vino.id} vino={vino} />
+        )
+      )}
+    </>
   );
 }
 

@@ -8,5 +8,14 @@ export function calculateInflation(originalPrice) {
 }
 
 export function formatPrice (price) {
-  return price.toLocaleString('es-AR', { style: 'currency', currency: 'ARS', minimumFractionDigits: 0 });
+  let options = {
+    locale: config?.locale ?? 'es-AR',
+    currency: config?.currency ?? 'ARS',
+    minimumFractionDigits: config?.minimumFractionDigits ?? 0,
+  };
+
+  return price.toLocaleString(
+    options.locale,
+    { style: 'currency', currency: options.currency, minimumFractionDigits: options.minimumFractionDigits }
+  );
 }

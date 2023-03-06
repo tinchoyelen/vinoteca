@@ -1,28 +1,32 @@
-import React from 'react' 
-import { Link } from 'react-router-dom'
+import React from 'react'
 import SaleTag from "../Extra/SaleTag";
 import {calculateInflation, formatPrice} from "../../utils/utils";
-import {Card, Col} from "react-bootstrap";
+import {Button, Card, Col} from "react-bootstrap";
+import {useParams} from "react-router-dom";
 
 
 
-export const Item = ({id, img, nombre, precio, cepa, oferta, oferta_tipo}) => {
+export const Item = ({vino}) => {
+  const { id } = useParams();
+
   return (
     <Col xs={3}>
       <Card className={'mb-3'}>
-        {oferta ? <SaleTag oferta_tipo={oferta_tipo} /> : ''}
-        <Card.Img variant={'top'} src= {`/imagenes/${img}`} alt="imagen de vinos"/>
+        {vino.oferta ? <SaleTag oferta_tipo={vino.oferta_tipo} /> : ''}
+        <Card.Img variant={'top'} src= {`/imagenes/${vino.img}`} alt="imagen de vinos"/>
         <Card.Body>
-          <Card.Title> {nombre}</Card.Title>
+          <Card.Title> {vino.nombre}</Card.Title>
           <Card.Text>Precio: {
-            formatPrice(oferta
-              ? calculateInflation(precio - (precio * parseFloat(oferta_tipo.match(/\d+/)[0]) / 100))
-              : calculateInflation(precio))
+            formatPrice(vino.oferta
+              ? calculateInflation(vino.precio - (vino.precio * parseFloat(vino.oferta_tipo.match(/\d+/)[0]) / 100))
+              : calculateInflation(vino.precio))
           }</Card.Text>
-          <p className="card-text">Cepa: {cepa}</p>
-          <Link className="btn btn-primary agregar" to={`/vinos/${id}`}>
-            Detalle
-          </Link>
+          <Card.Text>Cepa: {vino.cepa}</Card.Text>
+          {
+            typeof id === "undefined"
+              ? <Button href={`/vinos/${vino.id}`}>Detalle</Button>
+              : <Button /*onClick={}*/ >Agregar al carrito</Button>
+          }
         </Card.Body>
       </Card>
     </Col>
