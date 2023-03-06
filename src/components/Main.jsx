@@ -2,8 +2,8 @@ import React from 'react'
 import {ItemDetailContainer} from './Item/ItemDetailContainer'
 import ItemListContainer from './Item/ItemListContainer'
 import { Routes, Route } from 'react-router-dom';
-import Landing from './Landing';
-import Cart from './Cart';
+import Landing from './Views/Landing';
+import Cart from './Cart/Cart';
 
 
 

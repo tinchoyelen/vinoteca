@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {Link, useParams} from 'react-router-dom'
-import SaleTag from "../SaleTag/SaleTag";
-import Loading from "../Loading";
+import SaleTag from "../Extra/SaleTag";
+import Loading from "../Extra/Loading";
 import {calculateInflation} from "../../utils/utils";
 
 export const ItemDetailContainer = () => {

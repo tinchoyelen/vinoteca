@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import CartWidget from '../CartWidget'
+import CartWidget from '../Cart/CartWidget'
 import {Container, Nav, Navbar, NavDropdown} from "react-bootstrap";
 
 
