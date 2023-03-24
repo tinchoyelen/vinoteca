@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {Link, useParams} from 'react-router-dom'
 import SaleTag from "../SaleTag/SaleTag";
 import Loading from "../Loading";
+import { ItemCount } from './ItemCount'
 
 export const ItemDetailContainer = () => {
 

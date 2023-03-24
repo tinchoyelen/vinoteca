@@ -1,3 +1,5 @@
+import React, {useContext} from 'react'
+import { CartContext } from '../context/CartContext'
 import React, {useEffect, useState} from 'react'
 import CartWidget from '../CartWidget'
 import {Container, Nav, Navbar, NavDropdown} from "react-bootstrap";
