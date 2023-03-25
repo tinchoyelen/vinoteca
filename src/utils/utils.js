@@ -1,12 +1,18 @@
 import config from "../config/config";
 
-export function calculateInflation(originalPrice) {
+/*export function calculateInflation(originalPrice) {
   const currentMonth = new Date().getMonth() + 1;
   const inflationByMonth = config.currentInflationRate / 12
   // const inflatedAnualPrice = originalPrice + (originalPrice * config.currentInflationRate / 100)
   return Math.ceil(originalPrice + ((originalPrice * inflationByMonth / 100) * currentMonth));
-}
+}*/
 
+export function getSalePrice (item) {
+  return (item.oferta
+      ? item.precio - item.precio * (parseFloat(item.oferta_tipo.match(/\d+/)[0]) / 100)
+      : item.precio
+  )
+}
 export function formatPrice (price) {
   let options = {
     locale: config?.locale ?? 'es-AR',

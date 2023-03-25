@@ -6,45 +6,22 @@ import {
     MDBCol,
     MDBContainer,
     MDBIcon,
-    MDBInput,
     MDBRow,
     MDBTypography,
 } from "mdb-react-ui-kit";
-import React, {useState} from "react";
+import React from "react";
 import GoBack from "../Button/GoBack";
-import {calculateInflation, formatPrice} from "../../utils/utils";
+import {formatPrice, getSalePrice} from "../../utils/utils";
 import CartSummary from "./CartSummary";
+import {useCartItems, useCartUpdate} from "../../context/CartContext";
 
-export default function Cart({ updateCart, cartItems}) {
+export default function Cart() {
 
-    console.log(cartItems); //TODO delete
+    const cartItems = useCartItems().cartItems
+    const totalPrice = useCartItems().totalPrice
+    const handleRemove = useCartUpdate().handleRemove
 
-    const [totalPrice, setTotalPrice] = useState(0);
-    const handleRemove = (item) => {
-        const newCartItems = cartItems.filter((cartItem) => cartItem.id !== item.id);
-        updateCart(newCartItems);
-        setTotalPrice(totalPrice - (item.precio * item.cantidad));
-    };
 
-    const handleAdd = (item) => {
-        const newCartItems = [...cartItems];
-        const index = newCartItems.findIndex((cartItem) => cartItem.id === item.id);
-        newCartItems[index].cantidad += 1;
-        updateCart(newCartItems);
-        setTotalPrice(totalPrice + item.precio);
-    };
-
-    const handleSubtract = (item) => {
-        const newCartItems = [...cartItems];
-        const index = newCartItems.findIndex((cartItem) => cartItem.id === item.id);
-        if (newCartItems[index].cantidad === 1) {
-            handleRemove(item);
-        } else {
-            newCartItems[index].cantidad -= 1;
-            updateCart(newCartItems);
-            setTotalPrice(totalPrice - item.precio);
-        }
-    };
     return (
       <section className="h-100 h-custom" style={{ backgroundColor: "#eee" }}>
           <MDBContainer className="py-5 h-100">
@@ -60,16 +37,19 @@ export default function Cart({ updateCart, cartItems}) {
                                                   Carrito
                                               </MDBTypography>
                                               <MDBTypography className="mb-0 text-muted">
-                                                  {cartItems.length} items
+                                                  {cartItems.length === 1
+                                                    ? `${cartItems.length} Item`
+                                                    : `${cartItems.length} Items`}
                                               </MDBTypography>
                                           </div>
 
                                           <hr className="my-4" />
                                           {cartItems.length > 0 ? (
                                             <div className="cart-items">
-                                                {cartItems.map((item) => (
-                                                  <div key={item.id}>
-                                                  <MDBRow  className="mb-4 d-flex justify-content-between align-items-center">
+                                                {cartItems.map((item, index) => (
+                                                  <div key={index}>
+
+                                                    <MDBRow  className="mb-4 d-flex justify-content-between align-items-center">
                                                       <MDBCol md="2" lg="2" xl="2">
                                                           <MDBCardImage
                                                             src={`/imagenes/${item.img}`}
@@ -83,37 +63,23 @@ export default function Cart({ updateCart, cartItems}) {
                                                               {item.cepa}
                                                           </MDBTypography>
                                                       </MDBCol>
-                                                      <MDBCol md="3" lg="3" xl="3" className="d-flex align-items-center">
-                                                          <MDBBtn color="link" className="px-2" onClick={() => handleSubtract(item)}>
-                                                              <MDBIcon fas icon="minus" />
-                                                          </MDBBtn>
-
-                                                          <MDBInput type="number" min="0" defaultValue={item.cantidad} size="sm" />
-
-                                                          <MDBBtn color="link" className="px-2" onClick={() => handleAdd(item)}>
-                                                              <MDBIcon fas icon="plus" />
-                                                          </MDBBtn>
-                                                      </MDBCol>
                                                       <MDBCol md="3" lg="2" xl="2" className="text-end">
                                                           <MDBTypography tag="h6" className="mb-0">
                                                               {
-                                                                  formatPrice((item.oferta
-                                                                    ? calculateInflation(item.precio - item.precio * (parseFloat(item.oferta_tipo.match(/\d+/)[0]) / 100))
-                                                                    : calculateInflation(item.precio)) * item.cantidad)
+                                                                  formatPrice(getSalePrice(item))
                                                               }
                                                           </MDBTypography>
                                                       </MDBCol>
                                                       <MDBCol md="1" lg="1" xl="1" className="text-end">
-                                                          <MDBBtn color="link" className="px-2 text-muted" onClick={() => handleRemove(item)}>
+                                                          <MDBBtn color="link" className="px-2 text-muted" onClick={() => handleRemove(item, index)}>
                                                               <MDBIcon fas icon="times" />
                                                           </MDBBtn>
                                                       </MDBCol>
-
-                                                  </MDBRow>
+                                                    </MDBRow>
                                                     <hr className="my-4" />
                                                   </div>
                                                 ))}
-                                                <p>Total Price: {totalPrice} </p>
+                                                <p>Total Price: {formatPrice(totalPrice)} </p>
                                             </div>
                                           ) : (
                                             <p>Tu carrito está vacío</p>
@@ -126,10 +92,7 @@ export default function Cart({ updateCart, cartItems}) {
                                           </div>
                                       </div>
                                   </MDBCol>
-                                  {cartItems ??
-                                    <CartSummary totalPrice={totalPrice} cartItems={cartItems} />
-                                  }
-
+                                  {cartItems.length > 0 ? <CartSummary /> : ""}
                               </MDBRow>
                           </MDBCardBody>
                       </MDBCard>

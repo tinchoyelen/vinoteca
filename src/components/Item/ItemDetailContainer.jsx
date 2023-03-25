@@ -3,14 +3,13 @@ import {useParams} from 'react-router-dom'
 import Loading from "../Extra/Loading";
 import {Item} from "./Item";
 
-export const ItemDetailContainer = ({updateCart}) => {
+export const ItemDetailContainer = () => {
 
   const {id} = useParams()
   const [vino, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setTimeout(() => {
       fetch('../data/data.json')
         .then(response => response.json())
         .then((jsonData) => {
@@ -18,7 +17,6 @@ export const ItemDetailContainer = ({updateCart}) => {
         })
         .catch((error) => console.log(error))
         .finally(() => {setLoading(false)})
-    }, 2000)
   }, [id]);
 
   if (loading) {
@@ -27,6 +25,6 @@ export const ItemDetailContainer = ({updateCart}) => {
 
 
   return (
-    <Item vino={vino} updateCart={updateCart}/>
+    <Item vino={vino} />
   )
 }

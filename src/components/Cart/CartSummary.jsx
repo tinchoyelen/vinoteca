@@ -1,14 +1,14 @@
 import {MDBBtn, MDBCol, MDBInput, MDBTypography} from "mdb-react-ui-kit";
-import React, {useState} from "react";
+import React from "react";
 import config from "../../config/config";
 import {formatPrice} from "../../utils/utils";
+import {useCartItems, useCartUpdate} from "../../context/CartContext";
 
-export default function CartSummary({totalPrice, cartItems}) {
-  const [finalPrice, setFinalPrice] = useState(totalPrice)
-
-  function updateFinalPrice(deliveryPrice) {
-    setFinalPrice(totalPrice + parseInt(deliveryPrice))
-  }
+export default function CartSummary() {
+  const cartItems = useCartItems().cartItems
+  const totalPrice = useCartItems().totalPrice
+  const finalPrice = useCartItems().finalPrice
+  const updateFinalPrice = useCartUpdate().updateFinalPrice
 
   return (
     <MDBCol lg="4" className="bg-grey">

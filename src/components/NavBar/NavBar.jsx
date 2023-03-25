@@ -9,9 +9,10 @@ import {
   MDBNavbarNav,
   MDBNavbarToggler
 } from "mdb-react-ui-kit";
+import {Link} from "react-router-dom";
 
 
-const NavBar = ({cartItems}) => {
+const NavBar = () => {
   const [cepas, setData] = useState([]);
   const [showNavNoToggler, setShowNavNoToggler] = useState(false);
 
@@ -33,7 +34,7 @@ const NavBar = ({cartItems}) => {
         <>
           <MDBNavbar bg="light" expand="lg">
             <MDBContainer fluid>
-              <MDBNavbarBrand className={'link-dark'} href="/">LA VINOTECA</MDBNavbarBrand>
+              <MDBNavbarBrand className={'link-dark'} tag={Link} to="/">LA VINOTECA</MDBNavbarBrand>
               <MDBNavbarToggler
                 type='button'
                 data-target='#navbarTogglerDemo01'
@@ -46,9 +47,9 @@ const NavBar = ({cartItems}) => {
               </MDBNavbarToggler>
               <MDBCollapse navbar show={showNavNoToggler}>
                 <MDBNavbarNav className={'justify-content-end'}>
-                  <MDBNavbarItem><MDBNavbarLink className={'link-dark'} href="/">Home</MDBNavbarLink></MDBNavbarItem>
-                  <MDBNavbarItem><MDBNavbarLink className={'link-dark'} href="/vinos">Productos</MDBNavbarLink></MDBNavbarItem>
-                  <MDBNavbarItem><MDBNavbarLink className={'link-dark'}href="/ofertas">OnSale</MDBNavbarLink></MDBNavbarItem>
+                  <MDBNavbarItem><MDBNavbarLink className={'link-dark'} tag={Link} to="/">Home</MDBNavbarLink></MDBNavbarItem>
+                  <MDBNavbarItem><MDBNavbarLink className={'link-dark'} tag={Link} to="/vinos">Productos</MDBNavbarLink></MDBNavbarItem>
+                  <MDBNavbarItem><MDBNavbarLink className={'link-dark'} tag={Link} to="/ofertas">OnSale</MDBNavbarLink></MDBNavbarItem>
                   <MDBNavbarItem>
                     <MDBDropdown>
                       <MDBDropdownToggle tag='div' className='nav-link link-dark' role='button'>
@@ -56,7 +57,7 @@ const NavBar = ({cartItems}) => {
                         <MDBDropdownMenu>
                           {cepas.map(
                             cepa => (
-                              <MDBDropdownItem link key={cepa} href={'/cepas/' + cepa}>{cepa.charAt(0).toUpperCase() + cepa.slice(1)}</MDBDropdownItem>
+                              <MDBDropdownItem link key={cepa} tag={Link} to={'/cepas/' + cepa}>{cepa.charAt(0).toUpperCase() + cepa.slice(1)}</MDBDropdownItem>
                             )
                           )}
                         </MDBDropdownMenu>
@@ -64,7 +65,7 @@ const NavBar = ({cartItems}) => {
                     </MDBDropdown>
                   </MDBNavbarItem>
                   <MDBNavbarItem>
-                    <CartWidget cartItems={cartItems}/>
+                    <CartWidget />
                   </MDBNavbarItem>
                 </MDBNavbarNav>
               </MDBCollapse>

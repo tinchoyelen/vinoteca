@@ -10,7 +10,6 @@ const ItemListContainer = (props) => {
   const filter = props.filter;
 
   useEffect(() => {
-      setTimeout(() => {
         fetch('../data/data.json')
           .then(response => response.json())
           .then((jsonData) => {
@@ -29,7 +28,6 @@ const ItemListContainer = (props) => {
           })
           .catch((error) => console.log(error))
           .finally(() => {setLoading(false)})
-      }, 2000)
   }, [filter, cepa]);
 
   if (loading) {
