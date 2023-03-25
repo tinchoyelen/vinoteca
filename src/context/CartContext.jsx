@@ -43,9 +43,15 @@ export function CartProvider({ children }) {
     setFinalPrice(totalPrice + parseInt(deliveryPrice))
   }
 
+  const resetCart = () => {
+    setCartItems([])
+    setTotalPrice(0)
+    setFinalPrice(0)
+  }
+
   return (
     <CartContext.Provider value={{cartItems, totalPrice, finalPrice}}>
-      <CartUpdateContext.Provider value={{handleAdd, handleRemove, updateFinalPrice}}>
+      <CartUpdateContext.Provider value={{handleAdd, handleRemove, updateFinalPrice, resetCart}}>
         {children}
       </CartUpdateContext.Provider>
     </CartContext.Provider>
