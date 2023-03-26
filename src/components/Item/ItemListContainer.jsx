@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, {useEffect, useState} from 'react';
 import {Item} from './Item';
 import {useParams} from "react-router-dom";
 import Loading from "../Extra/Loading";
+import {getVinos} from "../../db/db";
+
 const ItemListContainer = (props) => {
 
   const { cepa } = useParams();
@@ -10,24 +12,25 @@ const ItemListContainer = (props) => {
   const filter = props.filter;
 
   useEffect(() => {
-        fetch('../data/data.json')
-          .then(response => response.json())
-          .then((jsonData) => {
-            switch (filter) {
-              case 'oferta':
-                setData(jsonData.filter(vino => vino[filter] === true))
-                break;
-              case 'cepa': {
-                setData(jsonData.filter(vino => vino[filter] === cepa))
-                break;
-              }
-              default: {
-                setData(jsonData)
-              }
-            }
-          })
-          .catch((error) => console.log(error))
-          .finally(() => {setLoading(false)})
+
+    getVinos()
+      .then(jsonData => {
+        switch (filter) {
+          case 'oferta':
+            setData(jsonData.filter(vino => vino[filter] === true))
+            break;
+          case 'cepa': {
+            setData(jsonData.filter(vino => vino[filter] === cepa))
+            break;
+          }
+          default: {
+            setData(jsonData)
+          }
+        }
+      })
+      .catch((error) => console.log(error))
+      .finally(() => {setLoading(false)})
+
   }, [filter, cepa]);
 
   if (loading) {

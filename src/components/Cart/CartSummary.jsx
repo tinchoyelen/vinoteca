@@ -1,8 +1,9 @@
-import {MDBBtn, MDBCol, MDBInput, MDBTypography} from "mdb-react-ui-kit";
+import {MDBCol, MDBInput, MDBTypography} from "mdb-react-ui-kit";
 import React from "react";
 import config from "../../config/config";
 import {formatPrice} from "../../utils/utils";
 import {useCartItems, useCartUpdate} from "../../context/CartContext";
+import CartConfirm from "./CartConfirm";
 
 export default function CartSummary() {
   const cartItems = useCartItems().cartItems
@@ -59,9 +60,7 @@ export default function CartSummary() {
           <MDBTypography tag="h5">{formatPrice(finalPrice)}</MDBTypography>
         </div>
 
-        <MDBBtn color="dark" block size="lg">
-          Confirmar y Comprar
-        </MDBBtn>
+        <CartConfirm />
       </div>
    </MDBCol>
   )
