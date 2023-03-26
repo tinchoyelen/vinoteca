@@ -1,3 +1,11 @@
+El proyecto es una e-commerce, referida a la venta de vinos. Se pueden observar diferentes secciones donde se pueden ver diferentes cepas de vinos e ir seleccionado entre ellas. Se diseño un carrito funcional a la pagina donde se puede seleccionar el vino elegido, borrarlo y en el mismo carrito se calcula el precio del producto y finalizar la compra.
+
+La pagina esta conectada con una base de datos de Firebase de donde se traen todos los productos seleccionados.
+
+Se instalaron las dependencias necesarias para lograr la app a traves del npm install-
+
+
+
 # Getting Started with Create React App gi 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

@@ -13,7 +13,7 @@ const Landing = () => {
         </div>
       </div>
       <div className="row">
-        <div className="col">Texto descriptivo</div>
+        <div className="col"></div>
       </div>
     </div>
   </>
