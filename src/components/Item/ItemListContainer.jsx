@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, {useEffect, useState} from 'react';
 import {Item} from './Item';
 import {useParams} from "react-router-dom";
 import Loading from "../Extra/Loading";
-import db from "../../db/db";
+import {getVinos} from "../../db/db";
+
 const ItemListContainer = (props) => {
 
   const { cepa } = useParams();
@@ -11,32 +12,25 @@ const ItemListContainer = (props) => {
   const filter = props.filter;
 
   useEffect(() => {
-    /*const myCollection = db.collection("vinos");
 
-    myCollection.get().then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        console.log(doc.id, " => ", doc.data());
-      });
-    });*/
+    getVinos()
+      .then(jsonData => {
+        switch (filter) {
+          case 'oferta':
+            setData(jsonData.filter(vino => vino[filter] === true))
+            break;
+          case 'cepa': {
+            setData(jsonData.filter(vino => vino[filter] === cepa))
+            break;
+          }
+          default: {
+            setData(jsonData)
+          }
+        }
+      })
+      .catch((error) => console.log(error))
+      .finally(() => {setLoading(false)})
 
-        fetch('../data/data.json')
-          .then(response => response.json())
-          .then((jsonData) => {
-            switch (filter) {
-              case 'oferta':
-                setData(jsonData.filter(vino => vino[filter] === true))
-                break;
-              case 'cepa': {
-                setData(jsonData.filter(vino => vino[filter] === cepa))
-                break;
-              }
-              default: {
-                setData(jsonData)
-              }
-            }
-          })
-          .catch((error) => console.log(error))
-          .finally(() => {setLoading(false)})
   }, [filter, cepa]);
 
   if (loading) {

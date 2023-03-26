@@ -10,6 +10,7 @@ import {
   MDBNavbarToggler
 } from "mdb-react-ui-kit";
 import {Link} from "react-router-dom";
+import {getVinos} from "../../db/db";
 
 
 const NavBar = () => {
@@ -17,8 +18,7 @@ const NavBar = () => {
   const [showNavNoToggler, setShowNavNoToggler] = useState(false);
 
   useEffect(() => {
-      fetch('../data/data.json')
-        .then(response => response.json())
+      getVinos()
         .then((jsonData) => {
           const cepas = [];
           jsonData.forEach(vino => {

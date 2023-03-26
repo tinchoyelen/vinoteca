@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore } from 'firebase/firestore/lite';
+import {collection, getDocs, getFirestore} from 'firebase/firestore/lite';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -18,4 +18,9 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+export const getVinos = async function () {
+  const vinosCol = collection(db, 'vinos');
+  const vinosSnapshot = await getDocs(vinosCol);
+  return vinosSnapshot.docs.map(doc => doc.data())
+}
 export default db;

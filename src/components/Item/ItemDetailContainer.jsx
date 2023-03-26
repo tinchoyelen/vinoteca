@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {useParams} from 'react-router-dom'
 import Loading from "../Extra/Loading";
 import {Item} from "./Item";
+import {getVinos} from "../../db/db";
 
 export const ItemDetailContainer = () => {
 
@@ -10,8 +11,7 @@ export const ItemDetailContainer = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-      fetch('../data/data.json')
-        .then(response => response.json())
+      getVinos()
         .then((jsonData) => {
           setData(jsonData.find(vino => vino.id === parseInt(id)))
         })
